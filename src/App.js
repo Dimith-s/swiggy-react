@@ -7,15 +7,20 @@ import About from './Comonents/About';
 import Contact from './Comonents/Contact';
 import Error from './Comonents/Error';
 import Restmenu from './Comonents/Restmenu';
+import { Provider } from 'react-redux';
+import appStore from './utils/appStore';
+import Cart from './Comonents/Cart';
 
 
 function App() {
   return (
+    <Provider store = {appStore}>
     <div className="App">
       
       <Header/>
       <Outlet/>
     </div>
+    </Provider>
   );
 }
 
@@ -40,6 +45,10 @@ function App() {
         path:'/restmenu/:res_id',
         element:<Restmenu/>
 
+      },
+      {
+        path:'/cart',
+        element: <Cart/>
       }
 
     ],

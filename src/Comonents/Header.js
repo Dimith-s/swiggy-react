@@ -1,12 +1,19 @@
 import { LOGO } from "../utils/contant"
-import {useEffect, useState} from 'react'
+import {useContext, useEffect, useState} from 'react'
 import { Link } from "react-router-dom"
 import useOnline from "../utils/useOnline"
 import Emojipicker from 'emoji-picker-react'
+import userContext from "../utils/userContext"
+import { useSelector } from "react-redux"
+
 
 
 const Header =()=>{
   const [btn,setBtn] = useState('login')
+  const {loginuser} = useContext(userContext)
+  const cartItems = useSelector((store)=>store.cart.item)
+  console.log(cartItems)
+
   useEffect(()=>{
     console.log('hai hw are you')
   },[])
@@ -23,11 +30,12 @@ const Header =()=>{
           <li className="p-4"><Link to='/' >home</Link></li>
           <li className="p-4"><Link to='/about'>about</Link></li>
           <li className="p-4"><Link to='/contact'>contact</Link></li>
-          <li className="p-4">cart</li>
+          <li className="p-4"><Link to='/cart'> cart({cartItems.length}</Link> items)</li>
           <button className='login' onClick={()=>{
             btn === 'login'?
             setBtn('logout'):setBtn('login')
           }} >{btn}</button>
+          <li className="p-4">{loginuser}</li>
         </ul>
       </div>
     </div>
